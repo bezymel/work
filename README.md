@@ -1,42 +1,5 @@
-Для решения данной задачи мы можем создать манифест для Kubernetes:
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: my-app
-spec:
-  replicas: 4
-  selector:
-    matchLabels:
-      app: my-app
-  template:
-    metadata:
-      labels:
-        app: my-app
-    spec:
-      containers:
-      - name: my-app
-        image: my-app-image
-        resources:
-          requests:
-            cpu: 0.5           # переопределение ресурсов CPU для первых запросов
-            memory: 128Mi
-          limits:
-            cpu: 1             # предельное использование CPU
-            memory: 128Mi
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
-    tolerations:                # толерансы для узлов
-    - key: zone
-      operator: Exists
-    - key: workload
-      operator: Equal
-      value: high
-      effect: NoSchedule
-
-
-В данном манифесте мы создаем деплоймент с 4 репликами, задаем ресурсы CPU и памяти для контейнера, а также предельное использование CPU. Используем RollingUpdate стратегию для обновления подов без перерывов в обслуживании. Также включаем толерансы для узлов, чтобы оптимизировать использование ресурсов. Мы можем также использовать горизонтальное масштабирование для автоматического увеличения или уменьшения количества подов в зависимости от текущей нагрузки на приложение. 
-
+![image](https://github.com/user-attachments/assets/64c3e2c5-9922-40db-a14f-f28334eb300f)
+![image](https://github.com/user-attachments/assets/98f642db-dd6d-4074-8cd7-bb19497e05e3)
+![image](https://github.com/user-attachments/assets/f9d231ed-b7d1-4b08-8263-f00bff31275c)
+![image](https://github.com/user-attachments/assets/63c9206d-bd7e-4d2a-9895-472debb18871)
+![image](https://github.com/user-attachments/assets/5d47edf0-bdc1-495b-a74e-8ef811390cf2)
